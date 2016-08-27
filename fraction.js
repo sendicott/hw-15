@@ -25,4 +25,5 @@ function fraction(nominator, denominator) {
 
 test(function(current) {
     current.deepEqual(fraction(12, 48), 4);
+    current.deepEqual(fraction(10, 100), 10);
 });
