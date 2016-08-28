@@ -11,22 +11,24 @@
  * then move onto the next number in the full-array
  */
 
-let full = [4, 6, 12, 17];
+let full = [4, 42, 6, 28, 12, 17];
 let divis = [2, 4];
 
 function divisible(firstArray, secondArray) {
-    let keepers = [];
+    let finalAnswer = 0;
     for (let i = 0; i < firstArray.length; i++) {
         for (let a = 0; a < secondArray.length; a++) {
-            if (firstArray[i] % secondArray[a] === 0) {
-                if (secondArray[a] === secondArray[secondArray.length]) {
-                    keepers.push(firstArray[i]);
-                }
-            }
+            if (firstArray[i] % secondArray[a] !== 0) {
+                console.log(i + ": " + firstArray[i]);
+                firstArray.splice(i, 1);
+            } 
         }
     }
-    console.log(keepers);
+    console.log(firstArray);
+    for (let i = 0; i < firstArray.length; i++) {
+        finalAnswer += firstArray[i];
+    }
+    console.log(finalAnswer);
 }
 
 divisible(full, divis);
-
