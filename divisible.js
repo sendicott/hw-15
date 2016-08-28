@@ -19,7 +19,9 @@ function divisible(firstArray, secondArray) {
     for (let i = 0; i < firstArray.length; i++) {
         for (let a = 0; a < secondArray.length; a++) {
             if (firstArray[i] % secondArray[a] === 0) {
-                keepers.push(firstArray[i]);
+                if (secondArray[a] === secondArray[secondArray.length]) {
+                    keepers.push(firstArray[i]);
+                }
             }
         }
     }
