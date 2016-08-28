@@ -18,12 +18,12 @@ function divisible(firstArray, secondArray) {
     let keepers = [];
     for (let i = 0; i < firstArray.length; i++) {
         for (let a = 0; a < secondArray.length; a++) {
-            if (firstArray[i] % secondArray[a] !== 0) {
-                
+            if (firstArray[i] % secondArray[a] === 0) {
+                keepers.push(firstArray[i]);
             }
         }
     }
-
+    console.log(keepers);
 }
 
 divisible(full, divis);
