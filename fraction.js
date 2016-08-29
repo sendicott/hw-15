@@ -37,13 +37,17 @@ function fraction(nominator, denominator) {
     } else {
         lower = denominator;
     }
+    // console.log(lower);
     for (let i = lower; i >= 2; i--) {
         if (nominator % i === 0 && denominator % i === 0) {
             let simpleD = denominator / i;
             console.log(simpleD);
             break;
+        } else {
+            console.log(1);
+            break;
         }
     }
 }
 
-fraction(12, 48);
+fraction(913, 105);
