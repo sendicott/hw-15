@@ -1,0 +1,15 @@
+.flexLetters {
+    border: 2px solid gray;
+    background-color: white;
+    text-align: center;
+    padding: 22px 40px;
+    font-size: 28px;
+    font-weight: 400;
+}
+
+#message {
+    display: inline-flex;
+    justify-content: flex-start;
+    width: 100%;
+    flex-wrap: wrap;
+}

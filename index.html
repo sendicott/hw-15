@@ -2,10 +2,22 @@
 
 <html>
 <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.1/mustache.js"></script>
     <script src="app.js"></script>
+    <script id="cryptogram-template" type="x-mustache-template">
+        <h1 id="header">Cryptogram</h1>
+        <div id="message">
+            {{ #decodedMessage }}
+                <p class="flexLetters">{{ . }}</p>
+            {{ /decodedMessage }}
+        </div>
+    </script>
+    <link rel="stylesheet" href="style.css">
 </head>    
 
 <body>
-    <h1>Page Loaded</h1>
+    <section id="outerBox">
+        <h1>Cryptogram Decrypted...sort of</h1>
+    </section>
 </body>
 </html>

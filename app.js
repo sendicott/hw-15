@@ -12,14 +12,13 @@ function fraction(nominator, denominator) {
             return denominator / i;
         } 
     }
-    return 1;
+    return denominator;
 }
 //------------------fraction------------------
 
 //------------------divisible------------------
 function divisible(firstArray, secondArray) {
     let finalAnswer = 0;
-    // this for loop needs to lose its value
     for (let i = 0; i < firstArray.length; i++) {
         for (let a = 0; a < secondArray.length; a++) {
             if (firstArray[i] % secondArray[a] !== 0) {
@@ -55,21 +54,19 @@ function longx(xstring) {
 
 //------------------celebrity------------------
 function celebrity(catalogOfLives) {
-    let longin = 0;
-    let current = 1;
     let personArray = [];
     for (let i = 0; i < catalogOfLives.length; i++) {
-        for (let a = catalogOfLives[i].birth; a <= catalogOfLives[i].death; a++) {
+        for (let a = catalogOfLives[i].birth; a < catalogOfLives[i].death; a++) {
             personArray.push(a);
         }
     }
+    let longin = 0;
+    let current = 0;
     let allTheYears = personArray.sort();
-    // console.log(allTheYears);
-    for (let y = 1; y < allTheYears.length; y++) {
-        if (allTheYears[y] !== allTheYears[y - 1]) {
-            // console.log(allTheYears[y]);
+    for (let i = 1; i < allTheYears.length; i++) {
+        if (allTheYears[i] !== allTheYears[i - 1]) {
             current = 1;
-        } else if (allTheYears[y] === allTheYears[y - 1]) {
+        } else if (allTheYears[i] === allTheYears[i - 1]) {
             current = current + 1;
             if (current > longin) {
                 longin = current;
@@ -93,7 +90,6 @@ function most(newString) {
     }
     let biggun = 0;
     for (let letter in alphaCount) {
-        // console.log(letter + ": " + alphaCount[letter]);
         if (alphaCount[letter] > biggun) {
             biggun = alphaCount[letter];
         }
@@ -109,20 +105,7 @@ function receiveTheCode() {
         let delivery = JSON.parse(request.responseText);
         let letters = delivery.letters;
         let encodedNumberArray = [];
-        // console.log(delivery);
-        // console.log(letters);
-        // // console.log(letters[0]);
-        // // console.log(letters[1]);
-        // // console.log(letters[2]);
-        // // console.log(letters[3]);
-        // // console.log(letters[4]);
-        // // console.log(letters[5]);
-        // // console.log(letters[6]);
-        // // console.log(letters[7]);
-        // // console.log(letters[8]);
-        // // console.log(letters[9]);
-        // // console.log(letters[0].inputs);
-        // // console.log(letters[0].operation);
+
         for (i = 0; i < letters.length; i++) {
     // fraction
             if (letters[i].operation === "fraction") {
@@ -144,19 +127,27 @@ function receiveTheCode() {
                 let output = celebrity(letters[i].inputs[0]);
                 encodedNumberArray.push(output);
             }
-    //most
+    // most
             if (letters[i].operation === "most") {
                 let output = most(letters[i].inputs[0]);
                 encodedNumberArray.push(output);
             }
         }
+    // decode and join the message into one message
         let decodedMessage = [];
         for (i = 0; i < encodedNumberArray.length; i++) {
             decodedMessage.push(String.fromCharCode(encodedNumberArray[i]));
         }
-        // console.log(encodedNumberArray);
-        console.log(decodedMessage.join(""));
-
+        let readyToAppend = decodedMessage.join("");
+    // TIME TO APPEND SOME SHIT
+        let parent = document.querySelector("#outerBox");
+        console.log(letters)
+        console.log(encodedNumberArray);
+        console.log(decodedMessage);
+        let template = document.querySelector('#cryptogram-template').innerHTML;
+        let section = document.createElement('section');
+        section.innerHTML = Mustache.render(template, { decodedMessage: decodedMessage });
+        parent.appendChild(section);
     });
     request.send();
 }

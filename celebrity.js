@@ -1,3 +1,5 @@
+import test from 'ava';
+
 /**
  * Write a function that accepts an array of objects
  * Each object needs a birth and death property (the year the person 
@@ -73,31 +75,58 @@ let testArray = [
     }
 ]
 
-function celebrity(catalogOfLives) {
-    let longin = 0;
-    let current = 1;
-    let personArray = [];
-    for (let i = 0; i < catalogOfLives.length; i++) {
-        for (let a = catalogOfLives[i].birth; a <= catalogOfLives[i].death; a++) {
-            personArray.push(a);
+// function celebrity(catalogOfLives) {
+//     let longin = 0;
+//     let current = 1;
+//     let personArray = [];
+//     for (let i = 0; i < catalogOfLives.length; i++) {
+//         for (let a = catalogOfLives[i].birth; a <= catalogOfLives[i].death; a++) {
+//             personArray.push(a);
+//         }
+//     }
+//     let allTheYears = personArray.sort();
+//     for (let y = 1; y < allTheYears.length; y++) {
+//         if (allTheYears[y] !== allTheYears[y - 1]) {
+//             current = 1;
+//         } else if (allTheYears[y] === allTheYears[y - 1]) {
+//             current = current + 1;
+//             if (current > longin) {
+//                 longin = current;
+//             }
+//         }
+//     }
+//     return longin;
+// }
+
+
+
+test(function (current) {
+    current.deepEqual(celebrity(smallerTest), 3);
+});
+
+function celebrity (arrayOfCelebrities) {
+    // console.log(arrayOfCelebrities);
+    let tally = [];
+    for (let i = 0; i < arrayOfCelebrities.length; i++) {
+        for (let j = arrayOfCelebrities[i].birth; j <= arrayOfCelebrities[i].death; j++) {
+            tally.push(j);
         }
     }
-    let allTheYears = personArray.sort();
-    // console.log(allTheYears);
-    for (let y = 1; y < allTheYears.length; y++) {
-        if (allTheYears[y] !== allTheYears[y - 1]) {
-            // console.log(allTheYears[y]);
-            current = 1;
-        } else if (allTheYears[y] === allTheYears[y - 1]) {
-            current = current + 1;
-            if (current > longin) {
-                longin = current;
+    tally.sort();
+    console.log(tally);
+    let biggun = 0;
+    let current = 0;
+    let currentYear = tally[0];
+    for (let i = 0; i < tally.length; i++) {
+        if (tally[i] === currentYear) {
+            current++;
+        } else {
+            if (current > biggun) {
+                biggun = current;
             }
+            current = 1;
         }
+        currentYear = tally[i];
     }
-    console.log(longin);
+    return biggun;
 }
-
-celebrity(testArray);
-
-
